@@ -1,0 +1,88 @@
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+
+const Dashboard = () => {
+  console.log("App is rendering!");
+  return (
+    <div className="p-6 space-y-4">
+      <h1 className="text-2xl font-bold">Dashboard</h1>
+      
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <Card>
+          <CardHeader>
+            <CardTitle>Total Jobs</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="text-4xl font-semibold">120</p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader>
+            <CardTitle>Pending Jobs</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="text-4xl font-semibold text-yellow-500">15</p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader>
+            <CardTitle>Completed Jobs</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="text-4xl font-semibold text-green-500">105</p>
+          </CardContent>
+        </Card>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+        <Card>
+          <CardHeader>
+            <CardTitle>Total Earnings</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="text-4xl font-semibold text-blue-500">$12,500</p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader>
+            <CardTitle>Pending Payouts</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="text-4xl font-semibold text-red-500">$1,200</p>
+          </CardContent>
+        </Card>
+      </div>
+
+      <div className="mt-6">
+        <h2 className="text-xl font-semibold mb-2">Provider Activity</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <Card>
+            <CardHeader>
+              <CardTitle>Active Providers</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-4xl font-semibold text-purple-500">35</p>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader>
+              <CardTitle>Top Rated Provider</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-lg font-semibold">Jane Smith - 4.9 ⭐</p>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader>
+              <CardTitle>Most Completed Jobs</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-lg font-semibold">John Doe - 50 Jobs</p>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Dashboard;

@@ -1,0 +1,83 @@
+import React, { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+
+const dummyUsers = [
+  { id: 1, name: "John Doe", role: "Service Provider", status: "Pending", rating: 4.5, jobsCompleted: 25 }, // Update with actual user data from the db API fetching
+  { id: 2, name: "Jane Smith", role: "Consumer", status: "Approved", rating: 5.0, jobsCompleted: 10 },
+];
+
+const UserManagement = () => {
+  const [selectedUser, setSelectedUser] = useState(null);
+  const [rejectionReason, setRejectionReason] = useState("");
+
+  const handleApprove = () => {
+    console.log(`Approved: ${selectedUser.name}`);
+    setSelectedUser(null);
+  };
+
+  const handleReject = () => {
+    console.log(`Rejected: ${selectedUser.name}, Reason: ${rejectionReason}`);
+    setSelectedUser(null);
+  };
+
+  return (
+    <div className="p-6">
+      <h2 className="text-2xl font-semibold mb-4">User Management</h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {dummyUsers.map((user) => (
+          <Card key={user.id} className="cursor-pointer" onClick={() => setSelectedUser(user)}>
+            <CardHeader>
+              <CardTitle>{user.name}</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p><strong>Role:</strong> {user.role}</p>
+              <p><strong>Status:</strong> {user.status}</p>
+              <p><strong>Rating:</strong> {user.rating} ⭐</p>
+              <p><strong>Jobs Completed:</strong> {user.jobsCompleted}</p>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+
+      {selectedUser && (
+        <Dialog open={!!selectedUser} onOpenChange={() => setSelectedUser(null)}>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>{selectedUser.name}</DialogTitle>
+            </DialogHeader>
+            <div>
+              <p><strong>Role:</strong> {selectedUser.role}</p>
+              <p><strong>Rating:</strong> {selectedUser.rating} ⭐</p>
+              <p><strong>Jobs Completed:</strong> {selectedUser.jobsCompleted}</p>
+              {selectedUser.status === "Pending" && (
+                <div className="mt-4">
+                  <Textarea
+                    placeholder="Detailed reason for rejection"
+                    value={rejectionReason}
+                    onChange={(e) => setRejectionReason(e.target.value)}
+                  />
+                  <Input
+                    placeholder="Short reason for rejection"
+                    value={rejectionReason}
+                    onChange={(e) => setRejectionReason(e.target.value)}
+                    className="mt-2"
+                  />
+                </div>
+              )}
+            </div>
+            <DialogFooter>
+              <Button onClick={handleApprove} className="bg-green-500">Approve</Button>
+              <Button onClick={handleReject} className="bg-red-500">Reject</Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+      )}
+    </div>
+  );
+};
+
+export default UserManagement;
